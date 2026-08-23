@@ -382,3 +382,56 @@ window.addEventListener('error',function(e){
     root.innerHTML='<div style="font-family:Arial;padding:32px;max-width:700px;margin:auto"><h1 style="color:#003DA5">Guthrie RMS</h1><h2>We could not load the RMS.</h2><p>Please refresh the page. If the issue continues, use the Reset Local App Data button below. This resets only this browser\'s locally saved RMS prototype data.</p><button style="padding:12px 18px;background:#003DA5;color:white;border:0;border-radius:10px" onclick="localStorage.removeItem(\'guthrieRMS7A\');localStorage.removeItem(\'guthrieRMS5A\');localStorage.removeItem(\'guthrieRMS4K\');localStorage.removeItem(\'guthrieRMS4F\');location.reload()">Reset Local App Data</button></div>';
   }
 });
+// Initial Guthrie RMS startup
+try {
+  render();
+} catch (err) {
+  console.error("Guthrie RMS startup error:", err);
+
+  const root = document.getElementById("app");
+
+  if (root) {
+    root.innerHTML = `
+      <div style="
+        font-family: Arial, sans-serif;
+        padding: 32px;
+        max-width: 760px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 18px;
+      ">
+        <h1 style="color:#003DA5;">Guthrie RMS</h1>
+        <h2>Startup Error</h2>
+
+        <p>
+          Guthrie RMS loaded the website files but encountered an error
+          while starting.
+        </p>
+
+        <p style="
+          font-family: monospace;
+          background: #f3f6fb;
+          padding: 12px;
+          border-radius: 10px;
+          overflow-wrap: anywhere;
+        ">
+          ${String(err?.message || err)}
+        </p>
+
+        <button
+          style="
+            padding:12px 18px;
+            background:#003DA5;
+            color:white;
+            border:0;
+            border-radius:10px;
+            cursor:pointer;
+          "
+          onclick="location.reload()"
+        >
+          Reload Guthrie RMS
+        </button>
+      </div>
+    `;
+  }
+}
